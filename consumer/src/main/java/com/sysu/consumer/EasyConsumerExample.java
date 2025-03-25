@@ -2,6 +2,7 @@ package com.sysu.consumer;
 
 
 import com.sysu.model.User;
+import com.sysu.proxy.ServiceProxyFactory;
 import com.sysu.service.UserService;
 
 /**
@@ -10,10 +11,10 @@ import com.sysu.service.UserService;
 public class EasyConsumerExample {
 
     public static void main(String[] args) {
-        // todo 需要获取 UserService 的实现类对象
-        UserService userService = null;
+        // 动态代理，为服务接口创建代理对象
+        UserService userService = ServiceProxyFactory.getProxy(UserService.class);
         User user = new User();
-        user.setName("yupi");
+        user.setName("laizhizheng");
         // 调用
         User newUser = userService.getUser(user);
         if (newUser != null) {
