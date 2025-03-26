@@ -24,7 +24,7 @@
         </dependency>
         <dependency>
             <groupId>com.sysu</groupId>
-            <artifactId>lzz-rpc-easy</artifactId>
+            <artifactId>lzz-rpc-core</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <!-- https://doc.hutool.cn/ -->

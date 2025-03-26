@@ -9,6 +9,7 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
+        <module>lzz-rpc-core</module>
         <module>lzz-rpc-easy</module>
         <module>consumer</module>
         <module>provider</module>
