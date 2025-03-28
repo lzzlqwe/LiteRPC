@@ -11,9 +11,13 @@ public class ConsumerExample {
 
         UserService userService = ServiceProxyFactory.getProxy(UserService.class);
         User user = new User();
-        user.setName("lzz");
+        user.setName("lzz666");
+
+        //远程调用
         User newUser = userService.getUser(user);
         System.out.println(newUser.getName());
+        System.out.println("--------------------------");
+
 
 //        //测试Mock（配置文件application.properties配置rpc.mock=true）
 //        //获取代理
