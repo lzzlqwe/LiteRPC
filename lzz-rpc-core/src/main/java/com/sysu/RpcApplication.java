@@ -1,8 +1,11 @@
 package com.sysu;
 
 
+import com.sysu.config.RegistryConfig;
 import com.sysu.config.RpcConfig;
 import com.sysu.constant.RpcConstant;
+import com.sysu.register.Registry;
+import com.sysu.register.RegistryFactory;
 import com.sysu.utils.ConfigUtils;
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,6 +26,11 @@ public class RpcApplication {
     public static void init(RpcConfig newRpcConfig) {
         rpcConfig = newRpcConfig;
         log.info("rpc init, config = {}", newRpcConfig.toString());
+
+        //注册中心初始化
+        RegistryConfig registryConfig = rpcConfig.getRegistryConfig();
+        Registry registry = RegistryFactory.getInstance(registryConfig.getRegistry());
+        registry.init(registryConfig);
     }
 
     /**
