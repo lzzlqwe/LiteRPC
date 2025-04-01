@@ -9,6 +9,7 @@ import com.sysu.register.Registry;
 import com.sysu.register.RegistryFactory;
 import com.sysu.server.HttpServer;
 import com.sysu.server.impl.VertxHttpServer;
+import com.sysu.server.tcp.VertxTcpServer;
 import com.sysu.service.UserService;
 import com.sysu.service.impl.UserServiceImpl;
 
@@ -36,7 +37,11 @@ public class ProviderExample {
         }
 
         // 启动 web 服务
-        HttpServer httpServer = new VertxHttpServer();
-        httpServer.doStart(RpcApplication.getRpcConfig().getServerPort());
+        // HttpServer httpServer = new VertxHttpServer();
+        // httpServer.doStart(RpcApplication.getRpcConfig().getServerPort());
+
+        // 启动 web 服务
+        VertxTcpServer vertxTcpServer = new VertxTcpServer();
+        vertxTcpServer.doStart(RpcApplication.getRpcConfig().getServerPort());
     }
 }
