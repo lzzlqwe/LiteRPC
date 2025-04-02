@@ -16,7 +16,15 @@ public class ConsumerExample {
         //远程调用
         User newUser = userService.getUser(user);
         System.out.println(newUser.getName());
-        System.out.println("--------------------------");
+        System.out.println("-----------第一次远程调用---------------");
+
+        newUser = userService.getUser(user);
+        System.out.println(newUser.getName());
+        System.out.println("-----------第二次远程调用---------------");
+
+        newUser = userService.getUser(user);
+        System.out.println(newUser.getName());
+        System.out.println("-----------第三次远程调用---------------");
 
 
 //        //测试Mock（配置文件application.properties配置rpc.mock=true）
