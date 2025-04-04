@@ -1,0 +1,4 @@
+failBack=com.sysu.fault.tolerant.impl.FailBackTolerantStrategy
+failFast=com.sysu.fault.tolerant.impl.FailFastTolerantStrategy
+failOver=com.sysu.fault.tolerant.impl.FailOverTolerantStrategy
+failSafe=com.sysu.fault.tolerant.impl.FailSafeTolerantStrategy

@@ -1,6 +1,7 @@
 package com.sysu.config;
 
 import com.sysu.fault.retry.RetryStrategyKeys;
+import com.sysu.fault.tolerant.TolerantStrategyKeys;
 import com.sysu.loadbalancer.LoadBalancerKeys;
 import com.sysu.serializer.SerializerKeys;
 import lombok.Data;
@@ -55,4 +56,9 @@ public class RpcConfig {
      * 重试策略
      */
     private String retryStrategy = RetryStrategyKeys.NO;
+
+    /**
+     * 容错策略
+     */
+    private String tolerantStrategy = TolerantStrategyKeys.FAIL_FAST;
 }

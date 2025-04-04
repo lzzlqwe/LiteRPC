@@ -10,6 +10,8 @@ import com.sysu.constant.ProtocolConstant;
 import com.sysu.constant.RpcConstant;
 import com.sysu.fault.retry.RetryStrategy;
 import com.sysu.fault.retry.RetryStrategyFactory;
+import com.sysu.fault.tolerant.TolerantStrategy;
+import com.sysu.fault.tolerant.TolerantStrategyFactory;
 import com.sysu.loadbalancer.LoadBalancer;
 import com.sysu.loadbalancer.LoadBalancerFactory;
 import com.sysu.model.RpcRequest;
@@ -80,14 +82,21 @@ public class ServiceProxy implements InvocationHandler {
             System.out.println("负载均衡选择的服务器" + selectedServiceMetaInfo.getServiceAddress());
 
             // 发送 RPC 请求
-            // 使用重试机制
-            RetryStrategy retryStrategy = RetryStrategyFactory.getInstance(rpcConfig.getRetryStrategy());
-            RpcResponse rpcResponse = retryStrategy.doRetry(() ->
-                    VertxTcpClient.doRequest(rpcRequest, selectedServiceMetaInfo)
-            );
+            RpcResponse rpcResponse;
+            try {
+                RetryStrategy retryStrategy = RetryStrategyFactory.getInstance(rpcConfig.getRetryStrategy());
+                rpcResponse = retryStrategy.doRetry(() ->
+                        VertxTcpClient.doRequest(rpcRequest, selectedServiceMetaInfo)
+                );
+            } catch (Exception e) {
+                // 容错机制
+                TolerantStrategy tolerantStrategy = TolerantStrategyFactory.getInstance(rpcConfig.getTolerantStrategy());
+                rpcResponse = tolerantStrategy.doTolerant(null, e);
+            }
 
             return rpcResponse.getData();
         } catch (Exception e) {
+            e.printStackTrace();
             throw new RuntimeException("调用失败");
         }
     }
