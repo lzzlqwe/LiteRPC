@@ -16,5 +16,5 @@ public interface TolerantStrategy {
      * @param e       异常
      * @return
      */
-    RpcResponse doTolerant(Map<String, Object> context, Exception e);
+    RpcResponse doTolerant(Map<String, Object> context, Exception e) throws Exception;
 }

@@ -15,7 +15,11 @@ public class ConsumerExample {
 
         //远程调用
         User newUser = userService.getUser(user);
-        System.out.println(newUser.getName());
+        if(newUser != null){
+            System.out.println(newUser.getName());
+        }else{
+            System.out.println("user == null");
+        }
         System.out.println("-----------第一次远程调用---------------");
 //
 //        newUser = userService.getUser(user);
