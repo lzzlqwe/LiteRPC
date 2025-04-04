@@ -8,6 +8,8 @@ import com.sysu.RpcApplication;
 import com.sysu.config.RpcConfig;
 import com.sysu.constant.ProtocolConstant;
 import com.sysu.constant.RpcConstant;
+import com.sysu.fault.retry.RetryStrategy;
+import com.sysu.fault.retry.RetryStrategyFactory;
 import com.sysu.loadbalancer.LoadBalancer;
 import com.sysu.loadbalancer.LoadBalancerFactory;
 import com.sysu.model.RpcRequest;
@@ -78,7 +80,12 @@ public class ServiceProxy implements InvocationHandler {
             System.out.println("负载均衡选择的服务器" + selectedServiceMetaInfo.getServiceAddress());
 
             // 发送 RPC 请求
-            RpcResponse rpcResponse = VertxTcpClient.doRequest(rpcRequest, selectedServiceMetaInfo);
+            // 使用重试机制
+            RetryStrategy retryStrategy = RetryStrategyFactory.getInstance(rpcConfig.getRetryStrategy());
+            RpcResponse rpcResponse = retryStrategy.doRetry(() ->
+                    VertxTcpClient.doRequest(rpcRequest, selectedServiceMetaInfo)
+            );
+
             return rpcResponse.getData();
         } catch (Exception e) {
             throw new RuntimeException("调用失败");

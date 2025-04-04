@@ -1,0 +1,3 @@
+no=com.sysu.fault.retry.impl.NoRetryStrategy
+fixedInterval=com.sysu.fault.retry.impl.FixedIntervalRetryStrategy
+exponentialBackoff=com.sysu.fault.retry.impl.ExponentialBackoffRetryStrategy
