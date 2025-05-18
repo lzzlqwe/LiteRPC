@@ -1,5 +1,5 @@
-## RPC框架
-这是一个基于Java的手写RPC框架项目，用于分布式系统中不同服务间通信。项目主要包含四个核心模块：
+## LiteRPC框架
+:smiley:这是一个基于Java的手写RPC框架项目，用于分布式系统中不同服务间通信。项目主要包含四个核心模块：
 - `common`：定义通用类和接口。
 - `consumer`：服务消费者，通过 ServiceProxyFactory 创建代理对象发起远程调用。
 - `provider`：服务提供者，将服务本地注册到 LocalRegistry，启动 HTTP 服务器监听端口并处理请求。
