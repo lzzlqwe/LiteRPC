@@ -1,11 +1,11 @@
-## LiteRPC框架
+## :surfer:LiteRPC框架
 :smiley:这是一个基于Java的手写RPC框架项目，用于分布式系统中不同服务间通信。项目主要包含四个核心模块：
 - `common`：定义通用类和接口。
 - `consumer`：服务消费者，通过 ServiceProxyFactory 创建代理对象发起远程调用。
 - `provider`：服务提供者，将服务本地注册到 LocalRegistry，启动 HTTP 服务器监听端口并处理请求。
 - `lzz-rpc-core`：框架核心模块，包含序列化器、代理、本地注册中心和 HTTP 服务器等功能。
 
-主要内容:
+:books:主要内容:
 1. RPC框架中需要维护一个全局的配置对象。在某个Provider引入 RPC 框架的项目启动时，从配置文件application.properties（若没有则使用默认配置）中读取配置并创建全局配置对象实例（使用双检锁单例模式），之后就可以集中地从这个对象中获取配置信息，而不用每次加载配置时再重新读取配置、并创建新的对象，减少了性能开销。
 2. Consumer在配置文件中设置mock=true，RPC框架通过工厂模式给服务接口创建Mock代理对象，即可通过动态代理即可实现Mock接口调用。
 3. 实现主流序列化器（jdk，json，kryo，hessian）。可扩展设计:使用工厂模式+单例模式简化创建和获取序列化器对象的操作。并通过扫描资源路径+反射自实现
